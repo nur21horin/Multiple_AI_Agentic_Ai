@@ -1,7 +1,4 @@
 
-
-# response=model.invoke("What is cricketer ?")
-# print(response.content)
 from dotenv import load_dotenv
 from langchain.chat_models import init_chat_model
 
