@@ -1,11 +1,5 @@
 
 
-# model = init_chat_model(
-#     "gemini-2.5-flash-lite",
-#     model_provider="google_genai"
-# )
-# #print(model)
-
 # response=model.invoke("What is cricketer ?")
 # print(response.content)
 from dotenv import load_dotenv
