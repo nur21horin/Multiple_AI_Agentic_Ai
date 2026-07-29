@@ -11,3 +11,4 @@ model = init_chat_model(
 
 response = model.invoke("What is a cricketer?")
 print(response.text())
+#Nur Mohammod
