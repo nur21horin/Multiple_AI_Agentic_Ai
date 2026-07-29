@@ -9,6 +9,6 @@ model = init_chat_model(
     model_provider="google_genai"
 )
 
-response = model.invoke("What is a cricketer?")
+response = model.invoke("What is a Bangladesh?")
 print(response.text())
 #Nur Mohammod
