@@ -5,6 +5,7 @@ from langchain_mistralai import ChatMistralAI
 
 model=ChatMistralAI(model="mistral-small-2506",temperature=0.9)
 
-response=model.invoke("Write a nur poiem ")
+prompt=input("You : ")
+response=model.invoke(prompt)
 
-print(response.content)
+print(response.content) 
