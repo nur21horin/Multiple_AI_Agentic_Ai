@@ -2,15 +2,28 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from langchain_mistralai import ChatMistralAI
+from langchain_core.messages import HumanMessage, AIMessage
 
-model=ChatMistralAI(model="mistral-small-2506",temperature=0.9)
+model = ChatMistralAI(
+    model="mistral-small-2506",
+    temperature=0.9
+)
 
- print("----------------Welcome type 0 to exit the application")
+messages = []
+
+print("---------- Welcome (Type 0 to exit) ----------")
 
 while True:
-   
-    prompt=input("You : ")
-    if prompt=='0':
+
+    prompt = input("You: ")
+
+    if prompt == "0":
         break
-    response=model.invoke(prompt)
-    print("Bot : ",response.content) 
+
+    messages.append(HumanMessage(content=prompt))
+
+    response = model.invoke(messages)
+
+    messages.append(AIMessage(content=response.content))
+
+    print("Bot:", response.content)
