@@ -6,7 +6,8 @@ load_dotenv()
 
 model = init_chat_model(
     "gemini-3.6-flash",
-    model_provider="google_genai"
+    model_provider="google_genai",
+    temperature=0.1,
 )
 
 response = model.invoke("What is a Bangladesh?")
