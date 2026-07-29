@@ -5,7 +5,12 @@ from langchain_mistralai import ChatMistralAI
 
 model=ChatMistralAI(model="mistral-small-2506",temperature=0.9)
 
-prompt=input("You : ")
-response=model.invoke(prompt)
+ print("----------------Welcome type 0 to exit the application")
 
-print(response.content) 
+while True:
+   
+    prompt=input("You : ")
+    if prompt=='0':
+        break
+    response=model.invoke(prompt)
+    print("Bot : ",response.content) 
