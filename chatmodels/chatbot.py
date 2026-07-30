@@ -15,7 +15,7 @@ messages = [
 ]
 
 print("---------- Welcome (Type 0 to exit) ----------")
-
+#Nur
 while True:
 
     prompt = input("You: ")
