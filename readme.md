@@ -1,74 +1,68 @@
 # Gen AI Learning
 
-A small Python project demonstrating LangChain-based AI model integration for chat and embeddings.
+A hands-on Python project for learning AI integration with LangChain, HuggingFace, and local inference pipelines.
 
-## Project Overview
+## What’s in this repository
 
-This repository contains sample scripts for:
-- interacting with chat models via Google Gemini and HuggingFace
-- running local HuggingFace chat pipelines
-- generating embeddings using HuggingFace sentence-transformers
+This repo contains practical examples for:
 
-## Structure
+- Chat-based AI using Google Gemini via `langchain`
+- Conversational AI with HuggingFace endpoint models
+- Local model inference with HuggingFace pipelines
+- Embedding generation using HuggingFace sentence transformers
+- Structured output parsing with Mistral and Pydantic
 
-- `requirements.txt` - Python dependencies used by the project.
-- `test.py` - quick environment validation that prints the installed LangChain version.
+## Repository layout
+
+- `requirements.txt` - Python dependencies for the examples.
+- `test.py` - simple environment check that prints the installed `langchain` version.
 - `chatmodels/`
-  - `chat.py` - sample code for initializing a Google Gemini chat model via `langchain`.
-  - `huggingface.py` - example of using `langchain_huggingface` with a remote HuggingFace endpoint.
-  - `localmodel.py` - example of running a local HuggingFace `text-generation` pipeline.
+  - `chat.py` - Google Gemini chat example using `langchain.chat_models.init_chat_model`.
+  - `huggingface.py` - HuggingFace endpoint chat example with `ChatHuggingFace`.
+  - `localmodel.py` - local model chat example using `HuggingFacePipeline`.
 - `embeddingmodels/`
-  - `embeddings.py` - example of generating embeddings with `HuggingFaceEmbeddings`.
+  - `embeddings.py` - embeddings example using `HuggingFaceEmbeddings` and `sentence-transformers/all-MiniLM-L6-v2`.
+- `nur/`
+  - `core.py` - structured response extraction example using `ChatMistralAI`, prompts, and `PydanticOutputParser`.
+  - `Uicore.py` - Streamlit UI for movie data extraction from free-form text.
 
-## Requirements
+## Setup
 
-Install dependencies with:
+Install dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-> Note: The project currently uses several LangChain-related packages and HuggingFace integration packages.
+If your examples require API keys or provider credentials, add them to a `.env` file in the repository root.
 
-## Usage
+## Running examples
 
-### 1. Validate environment
-
-Run the quick version test:
+1. Validate the Python environment:
 
 ```bash
 python test.py
 ```
 
-### 2. Run Google Gemini chat example
-
-Use `chatmodels/chat.py` to initialize and invoke a Google Gemini chat model.
+2. Run the Google Gemini chat example:
 
 ```bash
 python chatmodels/chat.py
 ```
 
-This script expects optional environment configuration via `.env` to be loaded by `python-dotenv`.
-
-### 3. Run HuggingFace endpoint chat example
-
-Use `chatmodels/huggingface.py` to call a HuggingFace endpoint model.
+3. Run the HuggingFace endpoint chat example:
 
 ```bash
 python chatmodels/huggingface.py
 ```
 
-### 4. Run local HuggingFace chat pipeline
-
-Use `chatmodels/localmodel.py` to run a local inference pipeline via `HuggingFacePipeline`.
+4. Run the local HuggingFace chat pipeline example:
 
 ```bash
 python chatmodels/localmodel.py
 ```
 
-### 5. Generate embeddings
-
-Use `embeddingmodels/embeddings.py` to compute document embeddings with the `all-MiniLM-L6-v2` model.
+5. Run the embeddings example:
 
 ```bash
 python embeddingmodels/embeddings.py
@@ -76,16 +70,16 @@ python embeddingmodels/embeddings.py
 
 ## Notes
 
-- The repository includes example scripts but is not packaged as a reusable library.
-- `python-dotenv` is used in some examples; create a `.env` file if you need to supply credentials or configuration for external providers.
-- The HuggingFace examples may require authentication or API access depending on the chosen model and environment.
+- `chatmodels/huggingface.py` and `chatmodels/localmodel.py` demonstrate two different HuggingFace integration patterns: remote endpoint calls and on-device/local pipeline inference.
+- `nur/core.py` and `nur/Uicore.py` show how to build schema-guided extraction with `langchain_core` prompts and `PydanticOutputParser`.
+- Some examples rely on external model access, so make sure your environment has the required credentials and dependencies.
 
-## Recommended Improvements
+## Suggestions
 
-- add a `.env.example` file documenting the required environment variables
-- add a centralized launcher or CLI for running examples
-- add documentation on provider-specific requirements for Google Gemini and HuggingFace
+- Add a `.env.example` file with required environment variables.
+- Add a simple CLI or launcher to run examples from one place.
+- Document provider-specific setup for Google Gemini, HuggingFace endpoints, and local model usage.
 
 ## License
 
-This repository is provided as-is for learning and experimentation.
+This repository is provided for learning and experimentation.

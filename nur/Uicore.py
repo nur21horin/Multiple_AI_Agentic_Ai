@@ -7,8 +7,6 @@ from typing import List, Optional
 from langchain_core.output_parsers import PydanticOutputParser
 from langchain_mistralai import ChatMistralAI
 
-# -------------------- Setup --------------------
-
 
 @st.cache_resource
 def get_model():
@@ -16,7 +14,6 @@ def get_model():
 
 model = get_model()
 
-# -------------------- Schema --------------------
 class Movie(BaseModel):
     title: str
     release_year: Optional[int]
@@ -36,7 +33,7 @@ Extract movie information from the paragraph.
     ("human", "{paragraph}")
 ])
 
-# -------------------- UI --------------------
+
 st.set_page_config(page_title="🎬 Movie Info Extractor", layout="centered")
 
 st.title("🎬 Movie Information Extractor")
