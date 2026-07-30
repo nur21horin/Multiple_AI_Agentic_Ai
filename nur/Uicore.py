@@ -13,7 +13,6 @@ def get_model():
     return ChatMistralAI(model="mistral-small-2506")
 
 model = get_model()
-
 class Movie(BaseModel):
     title: str
     release_year: Optional[int]
