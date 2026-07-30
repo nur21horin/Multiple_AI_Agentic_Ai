@@ -32,7 +32,6 @@ Extract movie information from the paragraph.
     ("human", "{paragraph}")
 ])
 
-
 st.set_page_config(page_title="🎬 Movie Info Extractor", layout="centered")
 
 st.title("🎬 Movie Information Extractor")
