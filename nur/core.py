@@ -5,7 +5,6 @@ from langchain_core.prompts import ChatPromptTemplate
 from pydantic import BaseModel
 from typing import List,Optional
 from langchain_core.output_parsers import PydanticOutputParser
-
 from langchain_mistralai import ChatMistralAI
 
 model=ChatMistralAI(model='mistral-small-2506')
