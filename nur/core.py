@@ -8,7 +8,6 @@ from langchain_core.output_parsers import PydanticOutputParser
 from langchain_mistralai import ChatMistralAI
 
 model=ChatMistralAI(model='mistral-small-2506')
-
 class Movie(BaseModel):
     title:str
     release_year:Optional[int]
