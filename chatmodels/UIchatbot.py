@@ -10,14 +10,41 @@ model = ChatMistralAI(
     temperature=0.9
 )
 
-st.set_page_config(page_title="Funny AI Agent", page_icon="🤖")
-st.title("🤖 Funny AI Agent")
+MODE_SETTINGS = {
+    "1": ("sad", "You are a sad AI agent. Respond in a sad, empathetic tone."),
+    "2": ("angry", "You are an angry AI agent. Respond in an angry, blunt tone."),
+    "3": ("funny", "You are a funny AI agent. Respond in a humorous tone."),
+    "4": ("happy", "You are a happy AI agent. Respond in a cheerful, positive tone."),
+}
+
+MOOD_ICONS = {
+    "sad": "😢",
+    "funny": "😂",
+    "angry": "😡",
+    "happy": "😊",
+}
+
+
+def update_system_message(mode_key: str):
+    label, prompt_text = MODE_SETTINGS[mode_key]
+    for index, message in enumerate(st.session_state.messages):
+        if isinstance(message, SystemMessage):
+            st.session_state.messages[index] = SystemMessage(content=prompt_text)
+            break
+    st.session_state.mode = label
+
 
 # ---------------- Session state (same messages list, just kept across reruns) ----------------
 if "messages" not in st.session_state:
-    st.session_state.messages = [
-        SystemMessage(content="You are a funny AI agent"),
-    ]
+    st.session_state.messages = [SystemMessage(content=MODE_SETTINGS["3"][1])]
+    st.session_state.mode = "funny"
+
+current_icon = MOOD_ICONS.get(st.session_state.mode, "🤖")
+st.set_page_config(page_title="Mood AI Agent", page_icon=current_icon)
+st.title(f"{current_icon} Mood-Based AI Agent")
+
+st.info("Mode: Funny (1 = Sad, 2 = Angry, 3 = Funny, 4 = Happy)")
+st.caption(f"Current mode: {st.session_state.mode.capitalize()}")
 
 # ---------------- Render existing chat history ----------------
 for msg in st.session_state.messages:
@@ -33,12 +60,18 @@ for msg in st.session_state.messages:
 prompt = st.chat_input("You:")
 
 if prompt:
-    st.session_state.messages.append(HumanMessage(content=prompt))
-    with st.chat_message("user"):
-        st.markdown(prompt)
+    normalized_prompt = prompt.strip()
 
-    response = model.invoke(st.session_state.messages)
+    if normalized_prompt in MODE_SETTINGS:
+        update_system_message(normalized_prompt)
+        st.success(f"Mode changed to {st.session_state.mode.capitalize()}")
+    else:
+        st.session_state.messages.append(HumanMessage(content=prompt))
+        with st.chat_message("user"):
+            st.markdown(prompt)
 
-    st.session_state.messages.append(AIMessage(content=response.content))
-    with st.chat_message("assistant"):
-        st.markdown(response.content)
+        response = model.invoke(st.session_state.messages)
+
+        st.session_state.messages.append(AIMessage(content=response.content))
+        with st.chat_message("assistant"):
+            st.markdown(response.content)
