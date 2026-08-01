@@ -31,7 +31,6 @@ def update_system_message(mode_key: str):
             st.session_state.messages[index] = SystemMessage(content=prompt_text)
             break
     st.session_state.mode = label
-
 # ---------------- Session state (same messages list, just kept across reruns) ----------------
 if "messages" not in st.session_state:
     st.session_state.messages = [SystemMessage(content=MODE_SETTINGS["3"][1])]
